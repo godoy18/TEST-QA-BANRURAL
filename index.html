@@ -58,7 +58,17 @@
 
   function checkGuess() {
 
-    let userGuess = guessField.value;
+    const userGuess = Number(guessField.value); //se convierte el dato ingresado a number
+
+        // Se añadio una validación para ver si el numero ingresado es un entero, si no lo es daría error.
+    if (!Number.isInteger(userGuess)) {
+    alert("Por favor ingresa un número entero.");
+    lastResult.textContent = 'Ingresa un número entero para continuar';
+    lastResult.style.backgroundColor = 'red';
+    setGameOver();
+    return;
+    }
+
     if(guessCount === 1) {
       guesses.textContent = 'Número aleatorio anterior: ';
     }
@@ -70,7 +80,7 @@
       lowOrHi.textContent = '';
       setGameOver();
     } else
-     if(userGuess == randomNumber) { //se cambio a la variable correcta y se cambio a una comparación de == estaba ===
+     if(userGuess === randomNumber) { //se cambio a la variable correcta 
       lastResult.textContent = 'Felicitaciones! adivinaste el número!';
       lastResult.style.backgroundColor = 'green'; //se agrego el color verde para el mensaje
       setGameOver();
@@ -88,6 +98,7 @@
     guessField.value = '';
     guessField.focus();
   }
+
   guessSubmit.addEventListener('click', checkGuess);//la funcion que se utiliza es addEventListener no addeventListener
 
   function setGameOver() {
@@ -115,7 +126,8 @@
 
 	  lastResult.style.backgroundColor = 'white';
 
-	  randomNumber = Math.floor(Math.random()) + 1;
+	  randomNumber = Math.floor(Math.random()*100); //Se arreglo  la forma de asignar el numero aleatorio
   }
 </script>
 </html>
+
