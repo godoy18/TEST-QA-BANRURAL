@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -42,9 +43,9 @@
 </body>
 
 <script>
-  let randomNumber = Math.random() * 10;
+  let randomNumber = Math.floor(Math.random()*100);// se coloco la funcion Math.floor que vuelve entero el numero que el math.random me proporciona.
 
-  const ATTEMPS = 5;
+  const ATTEMPS = 10; //se coloco de 10 para las oportunidades que tiene el usuario
   const guesses = document.querySelector('.guesses');
   const lastResult = document.querySelector('.lastResult');
   const lowOrHi = document.querySelector('.lowOrHi'); //falta el punto
@@ -54,6 +55,7 @@
   let guessCount = 1;
   let resetButton;
 
+
   function checkGuess() {
 
     let userGuess = guessField.value;
@@ -62,12 +64,13 @@
     }
     guesses.textContent += userGuess + ' ';
 
-    if(userGuess === randomNumber) {
+    if(guessCount === ATTEMPS) { //se modficaron a las variables correctas para que funcione el PERDISTES
       lastResult.textContent = '!!!Pérdistes!!!';
       lastResult.style.backgroundColor = 'red'; //se agrego el color rojo para el mensaje
       lowOrHi.textContent = '';
       setGameOver();
-    } else if(guessCount === ATTEMPS) {
+    } else
+     if(userGuess == randomNumber) { //se cambio a la variable correcta y se cambio a una comparación de == estaba ===
       lastResult.textContent = 'Felicitaciones! adivinaste el número!';
       lastResult.style.backgroundColor = 'green'; //se agrego el color verde para el mensaje
       setGameOver();
