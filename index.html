@@ -28,8 +28,9 @@
       <p>Hemos seleccionado un número aleatorío entre 1 a 100. Trata de adivinar el número, en un total de 10 turnos o menos. No te preocupes, te diremos sí el número es más alto o más bajo </p>
 
 <div class="form">
-  <label for="guessField">Ingresa el número a adivinar: </label><input type="text" id="guessField" class="guessField">
-  <input type="submit" value="Ingresar el número aleatorio" class="guessSubmit">
+  <label for="guessField">Ingresa el número a adivinar: </label>
+  <input type="text" id="guessField" class="guessField"> <!--mejor orden al tener iterado-->
+  <input type="submit" value="Ingresar el número aleatorio" class="guessSubmit" id="guessField">
 </div>
 
 <div class="resultParas">
@@ -46,7 +47,7 @@
   const ATTEMPS = 5;
   const guesses = document.querySelector('.guesses');
   const lastResult = document.querySelector('.lastResult');
-  const lowOrHi = document.querySelector('lowOrHi');
+  const lowOrHi = document.querySelector('.lowOrHi'); //falta el punto
   const guessSubmit = document.querySelector('.guessSubmit');
   const guessField = document.querySelector('.guessField');
 
@@ -63,16 +64,16 @@
 
     if(userGuess === randomNumber) {
       lastResult.textContent = '!!!Pérdistes!!!';
-      lastResult.style.backgroundColor = 'black';
+      lastResult.style.backgroundColor = 'red'; //se agrego el color rojo para el mensaje
       lowOrHi.textContent = '';
       setGameOver();
     } else if(guessCount === ATTEMPS) {
       lastResult.textContent = 'Felicitaciones! adivinaste el número!';
-      lastResult.style.backgroundColor = 'red';
+      lastResult.style.backgroundColor = 'green'; //se agrego el color verde para el mensaje
       setGameOver();
     } else {
       lastResult.textContent = 'Incorrecto! ';
-      lastResult.style.backgroundColor = 'green';
+      lastResult.style.backgroundColor = 'black';//se agrego el color negro para el mensaje
       if(userGuess < randomNumber) {
         lowOrHi.textContent = 'El número es mayor!';
       } else if(userGuess > randomNumber) {
@@ -84,7 +85,7 @@
     guessField.value = '';
     guessField.focus();
   }
-  guessSubmit.addeventListener('click', checkGuess);
+  guessSubmit.addEventListener('click', checkGuess);//la funcion que se utiliza es addEventListener no addeventListener
 
   function setGameOver() {
 	  guessField.disabled = true;
@@ -92,7 +93,7 @@
 	  resetButton = document.createElement('button');
 	  resetButton.textContent = 'Comienza un nuevo juego';
 	  document.body.appendChild(resetButton);
-	  resetButton.addeventListener('click', resetGame);
+	  resetButton.addEventListener('click', resetGame); //la funcion que se utiliza es addEventListener no addeventListener
   }
 
   function resetGame() {
